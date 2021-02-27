@@ -1,4 +1,9 @@
-Given the savings, current value and future value of a stock this returns the maximum profit possible.
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 19 00:13:37 2020
+
+@author: 44797
+"""
 
 def selectStock(saving, currentValue, futureValue):
     mem = {}
@@ -6,14 +11,12 @@ def selectStock(saving, currentValue, futureValue):
         mem[j] = futureValue[i] - j
     
     global_max = 0
-    
+    print(mem)
     for i in currentValue:
         bank = saving
         seen = []
-        values = currentValue.copy()
-        values.remove(i)
         bank -= i
-        stack = sorted([j for j in values if j <= bank])
+        stack = sorted([j for j in currentValue if j <= bank and j != i])
         stack_1 = []
         temp_max = mem[i]
         
@@ -42,7 +45,7 @@ def selectStock(saving, currentValue, futureValue):
             
             
             
-print(selectStock(250, [175,133,109,210,97, 24], [200,125,128,228,133, 30]))
+print(selectStock(1000, [175,133,109,210,235,673,56,34,76,890], [200,125,128,228,152,300,200,545,44,620]))
             
     
    
