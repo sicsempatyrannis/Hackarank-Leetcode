@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 19 00:13:37 2020
-
-@author: 44797
-"""
+Given the savings, current value and future value of a stock this returns the maximum profit possible.
 
 def selectStock(saving, currentValue, futureValue):
     mem = {}
