@@ -11,7 +11,8 @@ def selectStock(saving, currentValue, futureValue):
         mem[j] = futureValue[i] - j
     
     global_max = 0
-    print(mem)
+    
+
     for i in currentValue:
         bank = saving
         seen = []
@@ -21,6 +22,7 @@ def selectStock(saving, currentValue, futureValue):
         temp_max = mem[i]
         
         while stack:
+            global_max = max(global_max, temp_max)
             top = stack.pop()
 
             if top > bank and top not in seen:
@@ -34,21 +36,10 @@ def selectStock(saving, currentValue, futureValue):
                 seen.append(top)
                 stack_1.append(top)
                 temp_max += mem[top]
-        
-        global_max = max(global_max, temp_max)
-        
+               
     return global_max
-                
-            
-        
-                
-            
-            
-            
-print(selectStock(1000, [175,133,109,210,235,673,56,34,76,890], [200,125,128,228,152,300,200,545,44,620]))
-            
     
-   
+print(selectStock(250, [175,133,109,210], [200,125,128,228]))
 
     
     
