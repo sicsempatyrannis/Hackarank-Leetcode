@@ -44,36 +44,42 @@ class Solution:
         
     def selectStock(self, saving, currentValue, futureValue):
         self.current = currentValue
-       
+        
+        self.path ={}
+        
         mem = {}
         for i, j in enumerate(currentValue):
             mem[j] = futureValue[i] - j
       
         self.visited = [0] * len(currentValue)
         
-        def dfs(i, bank, profit):
+        def dfs(i, bank, profit, track):
+            
             
             if bank < self.current[i]:
                 self.global_max = max(profit, self.global_max)
+                self.path[profit] = track.copy()
                 return
             
+            track.append(self.current[i])
             bank -= self.current[i]
             profit += mem[self.current[i]]
             self.visited[i] = -1
             
             for m, n in enumerate(currentValue):
                 if self.visited[m] != -1:
-                    dfs(m, bank, profit)
+                    dfs(m, bank, profit, track.copy())
                     
             self.visited[i] = 1
             
         for v, k in enumerate(currentValue):
-            if v <= saving:
-                dfs(v, saving, 0)
-                
+            if k <= saving:
+                dfs(v, saving, 0, [])
+         
+        print(self.path)
         return self.global_max
             
-print(Solution().selectStock(250, [175,133,109,210], [200,125,128,228])) 
+print(Solution().selectStock(6000, [1000, 400, 786, 876, 456, 854, 6584], [2000, 52, 788, 885, 800, 521, 1000, 542])) 
     
 
 
