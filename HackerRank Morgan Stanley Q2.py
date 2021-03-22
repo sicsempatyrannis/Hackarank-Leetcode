@@ -50,13 +50,14 @@ class Solution:
         mem = {}
         for i, j in enumerate(currentValue):
             mem[j] = futureValue[i] - j
-      
+        
+        print(mem)
         self.visited = [0] * len(currentValue)
         
         def dfs(i, bank, profit, track):
             
             
-            if bank < self.current[i]:
+            if bank < self.current[i] or mem[self.current[i]] <= 0:
                 self.global_max = max(profit, self.global_max)
                 self.path[profit] = track.copy()
                 return
@@ -67,6 +68,7 @@ class Solution:
             self.visited[i] = -1
             
             for m, n in enumerate(currentValue):
+                
                 if self.visited[m] != -1:
                     dfs(m, bank, profit, track.copy())
                     
@@ -76,10 +78,12 @@ class Solution:
             if k <= saving:
                 dfs(v, saving, 0, [])
          
-        print(self.path)
-        return self.global_max
+        
+        return self.global_max, self.path
             
-print(Solution().selectStock(6000, [1000, 400, 786, 876, 456, 854, 6584], [2000, 52, 788, 885, 800, 521, 1000, 542])) 
+max_prof, path = Solution().selectStock(6000, [586, 400, 786, 876, 456, 854, 2000, 666], [777, 52, 788, 885, 800, 521, 20000, 542])
+
+print(path[max_prof], max_prof)
     
 
 
